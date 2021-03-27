@@ -65,7 +65,7 @@ public:
 		while (1)
 		{
 			std::unique_lock<std::mutex> lock(gMutex);
-			if (tasklist.empty())
+			whilie (tasklist.empty())
 			{
 				cond.wait_for(lock, std::chrono::microseconds(100));
 				//std::this_thread::sleep_for(std::chrono::microseconds(1000));
