@@ -74,6 +74,12 @@ void debug_pb2json(const ::google::protobuf::Message& msg, rapidjson::Value& jv,
 						arr.PushBack(rapidjson::Value(value.c_str(), value.length()), alloc);
 					}
 					break;
+				case ::google::protobuf::FieldDescriptor::CPPTYPE_ENUM:
+					{
+						auto value = reflect->GetRepeatedEnumValue(msg, f, idx);
+						arr.PushBack(value, alloc);
+					}
+					break;
 				case ::google::protobuf::FieldDescriptor::CPPTYPE_MESSAGE:
 					{
 						rapidjson::Value temp(rapidjson::kObjectType);
@@ -143,6 +149,12 @@ void debug_pb2json(const ::google::protobuf::Message& msg, rapidjson::Value& jv,
 					jv.AddMember(rapidjson::StringRef(fname.c_str()), rapidjson::Value(value.c_str(), value.length(),alloc), alloc);
 				}
 				break;
+			case ::google::protobuf::FieldDescriptor::CPPTYPE_ENUM:
+				{
+					auto value = reflect->GetEnumValue(msg, f);
+					jv.AddMember(rapidjson::StringRef(fname.c_str()), value, alloc);
+				}
+				break;	
 			case ::google::protobuf::FieldDescriptor::CPPTYPE_MESSAGE:
 				{
 					rapidjson::Value temp(rapidjson::kObjectType);
