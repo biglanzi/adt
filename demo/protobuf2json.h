@@ -89,6 +89,10 @@ void debug_pb2json(const ::google::protobuf::Message& msg, rapidjson::Value& jv,
 		}
 		else
 		{
+			if (!reflect->HasField(msg, f))
+			{
+				continue;
+			}
 			switch (f->cpp_type())
 			{
 			case  ::google::protobuf::FieldDescriptor::CPPTYPE_INT32:
