@@ -140,7 +140,7 @@ void debug_pb2json(const ::google::protobuf::Message& msg, rapidjson::Value& jv,
 			case ::google::protobuf::FieldDescriptor::CPPTYPE_STRING:
 				{
 					auto value = std::move(reflect->GetString(msg, f));
-					jv.AddMember(rapidjson::StringRef(fname.c_str()), rapidjson::Value(value.c_str(), value.length()), alloc);
+					jv.AddMember(rapidjson::StringRef(fname.c_str()), rapidjson::Value(value.c_str(), value.length(),alloc), alloc);
 				}
 				break;
 			case ::google::protobuf::FieldDescriptor::CPPTYPE_MESSAGE:
