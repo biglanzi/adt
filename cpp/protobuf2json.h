@@ -84,7 +84,7 @@ void debug_pb2json(const ::google::protobuf::Message& msg, rapidjson::Value& jv,
 					{
 						rapidjson::Value temp(rapidjson::kObjectType);
 						debug_pb2json(reflect->GetRepeatedMessage(msg, f, idx), temp, doc);
-						arr.PushBack(temp, alloc);
+						arr.PushBack(std::move(temp), alloc);
 					}
 					break;
 				default:
@@ -159,7 +159,7 @@ void debug_pb2json(const ::google::protobuf::Message& msg, rapidjson::Value& jv,
 				{
 					rapidjson::Value temp(rapidjson::kObjectType);
 					debug_pb2json(reflect->GetMessage(msg, f), temp, doc);
-					jv.AddMember(rapidjson::StringRef(fname.c_str()), temp, alloc);
+					jv.AddMember(rapidjson::StringRef(fname.c_str()), std::move(temp), alloc);
 				}
 				break;
 			default:
