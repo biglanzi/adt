@@ -11,7 +11,7 @@ to=${2:-HEAD}
 readonly filter="username"
 
 readonly tmpfile="${curpath}/$(getRandom)uu"
-svn diff -r "${from}":"${to}" --summarize|tr -s ' '|cut -d ' ' -f 2|grep -E -v '.dll$|.py$|.user$|.filters$|.pdb$|.lib$|.vcxproj$|.sln$' >> "${tmpfile}"
+svn diff -r "${from}":"${to}" --summarize|tr -s ' '|cut -d ' ' -f 2|grep -E -v '.dll$|.py$|.user$|.filters$|.pdb$|.lib$|.vcxproj$|.sln$|.cc$|.pb.h$' >> "${tmpfile}"
 while read file
 do
 if (($(svn log -q -r "$from":"$to" "$file"|grep -c "${filter}") != 0));then
